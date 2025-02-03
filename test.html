@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Model Viewer Example</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+    <style>
+        body {
+            margin: 1em;
+            padding: 0;
+            font-family: Google Sans, Noto, Roboto, Helvetica Neue, sans-serif;
+            color: #244376;
+        }
+
+        .card {
+            margin: 3em auto;
+            display: flex; /* Default: Show all */
+            flex-direction: column;
+            max-width: 600px;
+            border-radius: 6px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+
+        .hidden {
+            display: none; /* Hide specific cards when URL has ?card= */
+        }
+
+        model-viewer {
+            width: 100%;
+            height: 400px;
+            background-color: #70BCD1;
+            --poster-color: #ffffff00;
+        }
+
+        .attribution {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 1em;
+        }
+
+        .attribution h1 {
+            margin: 0 0 0.25em;
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            function showSelectedCard() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const cardId = urlParams.get('card'); // Get 'card' parameter from URL
+                const cards = document.querySelectorAll('.card');
+
+                if (cardId) {
+                    // If 'card' is present in the URL, hide all cards first
+                    cards.forEach(card => card.classList.add('hidden'));
+
+                    // Show only the selected card
+                    const selectedCard = document.getElementById(cardId);
+                    if (selectedCard) {
+                        selectedCard.classList.remove('hidden');
+                    }
+                }
+            }
+
+            showSelectedCard(); // Run on page load
+        });
+    </script>
+</head> 
+<body>
+    <div class="card" id="softtoy">
+        <model-viewer src="https://vijaygrandhi.github.io/glbfiles/Toy Main.glb"
+                      ios-src="https://vijaygrandhi.github.io/glbfiles/Toy Main.usdz"
+                      poster="https://vijaygrandhi.github.io/glbfiles/toy_main_poster.png"
+                      alt="Soft Toy"
+                      shadow-intensity="1"
+                      camera-controls
+                      auto-rotate 
+                      ar>
+        </model-viewer>
+        <section class="attribution">
+            <h1>Soft Toy</h1>
+        </section>
+    </div>
+
+    <div class="card" id="siva">
+        <model-viewer src="https://vijaygrandhi.github.io/glbfiles/Siva Main.glb"
+                      ios-src="https://vijaygrandhi.github.io/glbfiles/Siva Main.usdz"
+                      poster="https://vijaygrandhi.github.io/glbfiles/siva_main_poster.png"
+                      alt="Model Siva"
+                      shadow-intensity="1"
+                      camera-controls
+                      auto-rotate 
+                      ar>
+        </model-viewer>
+        <section class="attribution">
+            <h1>Model Siva</h1>
+        </section>
+    </div>
+</body>
+</html>
