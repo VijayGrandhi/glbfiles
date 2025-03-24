@@ -88,12 +88,34 @@
             bottom: 0;
         }
     </style>
+     <script>
+         document.addEventListener("DOMContentLoaded", function() {
+             function showSelectedCard() {
+                 const urlParams = new URLSearchParams(window.location.search);
+                 const cardId = urlParams.get('card'); // Get 'card' parameter from URL
+                 const cards = document.querySelectorAll('.card');
+ 
+                 if (cardId) {
+                     // If 'card' is present in the URL, hide all cards first
+                     cards.forEach(card => card.classList.add('hidden'));
+ 
+                     // Show only the selected card
+                     const selectedCard = document.getElementById(cardId);
+                     if (selectedCard) {
+                         selectedCard.classList.remove('hidden');
+                     }
+                 }
+             }
+ 
+             showSelectedCard(); // Run on page load
+         });
+     </script>
 </head>
 <body>
     <div class="header">Dine AR - 3D Menu Viewer</div>
 
     <div class="container">
-        <div class="card">
+        <div class="card" id="softtoy">
             <model-viewer src="https://vijaygrandhi.github.io/glbfiles/Toy Main.glb"
                           alt="Soft Toy"
                           shadow-intensity="1"
@@ -106,7 +128,7 @@
             </section>
         </div>
 
-        <div class="card">
+        <div class="card" id="siva">
             <model-viewer src="https://vijaygrandhi.github.io/glbfiles/Siva Main.glb"
                           alt="Shiva"
                           shadow-intensity="1"
@@ -119,7 +141,7 @@
             </section>
         </div>
 
-        <div class="card">
+        <div class="card" id="popcorn">
             <model-viewer src="https://vijaygrandhi.github.io/glbfiles/untitled.glb"
                           alt="Popcorn"
                           shadow-intensity="1"
