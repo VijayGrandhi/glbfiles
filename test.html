@@ -112,6 +112,23 @@
  
              showSelectedCard(); // Run on page load
          });
+        window.addEventListener('DOMContentLoaded', () => {
+        const models = document.querySelectorAll('.ar-model');
+
+        models.forEach((model) => {
+          model.pause(); // stop animation on load
+
+          model.addEventListener('ar-status', (event) => {
+            if (event.detail.status === 'session-started') {
+              model.currentTime = 0;
+              model.play();
+            }
+            if (event.detail.status === 'not-presenting') {
+              model.pause();
+            }
+          });
+        });
+      });
      </script>
 </head>
 <body>
@@ -193,6 +210,22 @@
             </model-viewer>
             <section class="attribution">
                 <h1>Popcorn</h1>
+            </section>
+        </div>
+        <div class="card" id="animatedbiryani">
+            <model-viewer src="https://vijaygrandhi.github.io/glbfiles/untitled.glb"
+                          ios-src="https://vijaygrandhi.github.io/glbfiles/untitled.usdz"
+                          poster="https://vijaygrandhi.github.io/glbfiles/untitled.glb"
+                          alt="Biryani"
+                          ar-modes="scene-viewer quick-look webxr"
+                          shadow-intensity="1"
+                          camera-controls
+                          ar-placement="floor"
+                          auto-rotate
+                          ar>
+            </model-viewer>
+            <section class="attribution">
+                <h1>Biryani</h1>
             </section>
         </div>
     </div>
